@@ -1,0 +1,92 @@
+backend:
+  name: github
+  repo: TownCloud/site-village-of-dundee
+  squash_merges: true
+  commit_messages:
+    create: Create {{collection}} “{{slug}}”
+    update: Update {{collection}} “{{slug}}”
+    delete: Delete {{collection}} “{{slug}}”
+    uploadMedia: Upload “{{path}}”
+    deleteMedia: Delete “{{path}}”
+    openAuthoring: '{{message}}'
+publish_mode: editorial_workflow
+media_folder: static/uploads
+public_folder: /uploads
+collections:
+  - label: 'Post'
+    name: 'post'
+    folder: 'src/posts'
+    create: true
+    slug: '{{slug}}'
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Date', name: 'date', widget: 'date' }
+      - {
+          label: 'Teaser',
+          name: 'teaser',
+          widget: 'string',
+          hint: 'This will only show on the homepage',
+        }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+  - label: 'Content'
+    name: 'content'
+    files:
+      - label: 'Site Configuration'
+        name: 'config'
+        file: 'src/content/setup.md'
+        fields:
+          - label: 'Municipality'
+            name: 'municipality'
+            widget: 'string'
+            hint: 'What is the name of your Municipality?'
+          - label: 'Home Page'
+            name: 'homeGroup'
+            widget: 'object'
+            fields:
+              - label: 'Hero Image'
+                name: 'heroGroup'
+                widget: 'object'
+                fields:
+                  - label: 'Hero Image'
+                    name: 'hero'
+                    widget: 'image'
+                    default: 'static/uploads/successkid.jpg'
+                    media_library:
+                      config:
+                        multiple: false
+                  - label: 'Hero image alt text'
+                    name: 'heroAltText'
+                    widget: 'string'
+                    hint: 'Description of the image'
+              - label: 'Address'
+                name: 'addressGroup'
+                widget: 'object'
+                fields:
+                  - { label: Address, name: address, widget: string }
+                  - { label: City, name: city, widget: string }
+                  - { label: State, name: state, widget: string }
+                  - { label: Zip Code, name: zipcode, widget: string }
+              - label: 'Contact'
+                name: 'contactGroup'
+                widget: 'object'
+                fields:
+                  - {
+                      label: Email,
+                      name: email,
+                      widget: string,
+                      required: false,
+                    }
+                  - {
+                      label: Phone,
+                      name: phone,
+                      widget: string,
+                      required: false,
+                    }
+                  - { label: Fax, name: fax, widget: string, required: false }
+          - { label: Facebook, name: facebook, widget: string, required: false }
+          - { label: Twitter, name: twitter, widget: string, required: false }
+          - label: Instagram
+            name: instagram
+            widget: string
+            required: false
+          - { label: Youtube, name: youtube, widget: string, required: false }
